@@ -1,0 +1,30 @@
+# Config file for automatic testing at travis-ci.org
+# This file will be regenerated if you run travis_pypi_setup.py
+
+language: python
+python:
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+  - "3.6"
+  - "3.6-dev" # 3.6 development branch
+  - "3.7-dev" # 3.7 development branch
+  - "nightly"
+
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install: pip install -U tox-travis
+
+# command to run tests, e.g. python setup.py test
+script: tox
+
+# After you create the Github repo and add it to Travis, run the
+# travis_pypi_setup.py script to finish PyPI deployment setup
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: leesdolphin
+  password:
+    secure: "p4Yswd6uIo2YJOX4OxOeMW/fFu5XrcKYnHSexyq1bEBEE4J8G2vQtMp9aQpBIcvZ74o81JVHTK+Ug6WDmTfymuDZaWTGcIrJdjSAsv2S87Zghd4CuCfa01zyoJ53jPkOZ5cTw6QarUnuOmWK71gz+qKSthDE45m0/qx30U+gx9SuFlaaY48AWRcEF8wzuiF+oTohVMaDOsgkg/4dwH1McBfc0cGGgqrBSZx2gFdG84viTUQm2BNRBpmv8zglWuATTdic98vO/uX4iUBSqUM8qlcY3atyMwCVc+mymZLwkJKNemfMORpKrE3cPvvoJmd37peVvJ1sdLt/X5Rz1EYDVp3+/OCzcFwctFxq1Hgl+NpmUnNCTDwQEIdVmJrbVQ/qHFTbPCL49qY7LAu04t1adDRbiJVUGuMIM7dLOuHMMo/KEkw66TKg5PX22mQ4FCv+lenV2eti2JWNUfT2IYxxaDXQGgqpVtEjELhFIqCFgWPTnUQWwrlKK/y97NBA5QHcgD7KTtdk+ETmRR4MdBKqnty2j0mzEFamnToCTNEsRHO2xcMgZFGLjXTuXEjCwgv8pdN2aZH3kD03qBk1Z5QRXhzidoAjqml6JVDSzusP0OTmvhSXlz5H6bfSx/pFwbgDFCtX9F4ptE3RneNfjDHJ6wZs44d862H57qwClzKNSYU="
+  on:
+    tags: true
+    repo: leesdolphin/adocker
+    python: 3.6
