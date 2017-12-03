@@ -21,11 +21,14 @@ test_requirements = [
     'pytest',
     'pytest-aiohttp',
     'pytest-asyncio',
-    # TODO: put package test requirements here
 ]
 
 cov_requirements = [
     'coverage',
+]
+
+lint_equirements = [
+    'flake8',
 ]
 
 setup(
