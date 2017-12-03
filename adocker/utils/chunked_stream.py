@@ -12,38 +12,6 @@ T = typ.TypeVar('T')
 SplitterReturn = typ.Optional[typ.Tuple[T, typ.Text]]
 
 
-async def split_buffer(
-        stream: typ.AsyncIterable[bytes],
-        splitter: typ.Optional[typ.Callable[[typ.Text],
-                                            SplitterReturn]] = None,
-        decoder: typ.Callable[[typ.Text], T] = lambda a: a,
-        encoding: typ.Optional[typ.AnyStr] = 'utf-8') -> typ.AsyncIterable[T]:
-    """
-    Given an async generator which yields byte-strings and a splitter
-    function, will convert the data to a string using ``encoding``; then
-    splits the data using ``splitter``, and then yielding the result of
-    calling ``decoder`` with the split data.
-
-    .. note::
-        ``splitter`` and ``decoder`` should be synchronous functions.
-    """
-    splitter = splitter or stream_utils.line_splitter
-    buffered = ''
-    async for data in stream:
-        buffered += data
-        while True:
-            buffer_split = splitter(buffered)
-            if buffer_split is None:
-                break
-            item, buffered = buffer_split
-            yield item
-    if buffered:
-        try:
-            yield decoder(buffered)
-        except Exception as e:
-            raise ChunkedStreamingError() from e
-
-
 class ChunkedBytesStream(collections.abc.AsyncIterator, AsyncContextManager):
     def __init__(self, response: aiohttp.ClientResponse):
         self.response = response

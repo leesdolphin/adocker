@@ -37,16 +37,18 @@ class DockerClient(AsyncContextManager):
         )
 
     def __init__(self, url, **kwargs):
-        self.client = APIClient(url=url, **kwargs)
+        self.api = APIClient(url=url, **kwargs)
 
     # TODO: Handlers for images, containers ect.
 
     def events(self, **params) -> StreamableResponse:
-        return self.client._json_stream(
+        return self.api._json_stream(
             "events",
             method="GET",
             params=params,
         )
 
-    async def __aexit__(self):
-        await self._client.close()
+
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await self.client.__aexit__(exc_type, exc, tb)

@@ -3,15 +3,15 @@ import typing as typ
 
 import aiohttp
 
-from .contextlib import AsyncContextManager
 from .chunked_stream import ChunkedBytesStream, JsonStream
-
+from .contextlib import AsyncContextManager
 
 ResponseType = typ.TypeVar('ResponseType', aiohttp.ClientResponse)
 StreamType = typ.TypeVar('StreamType', ChunkedBytesStream)
 
 
-class StreamableResponse(typ.Generic[ResponseType, StreamType], abc.Awaitable, abc.AsyncIterator, AsyncContextManager):
+class StreamableResponse(typ.Generic[ResponseType, StreamType], abc.Awaitable,
+                         abc.AsyncIterator, AsyncContextManager):
     """
     A Response to a method that streams blocks of data.
 
@@ -24,9 +24,10 @@ class StreamableResponse(typ.Generic[ResponseType, StreamType], abc.Awaitable, a
         This warning also applies to reading from the respone's content as the
         data is streamed.
     """
+
     def __init__(self,
                  pending_response: typ.Awaitable[ResponseType],
-                 stream_class: typ.Type[StreamType]=JsonStream):
+                 stream_class: typ.Type[StreamType] = JsonStream):
         self.pending_response = pending_response
         self.stream_class = stream_class
         self.response = None
