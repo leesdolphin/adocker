@@ -5,14 +5,15 @@ AsyncIO Docker
 
 .. image:: https://img.shields.io/pypi/v/adocker.svg
         :target: https://pypi.python.org/pypi/adocker
-
 .. image:: https://img.shields.io/travis/leesdolphin/adocker.svg
         :target: https://travis-ci.org/leesdolphin/adocker
-
+        :alt: Build status
+.. image:: https://coveralls.io/repos/github/leesdolphin/adocker/badge.svg?branch=master
+        :target: https://coveralls.io/github/leesdolphin/adocker?branch=master
+        :alt: Coveralls status
 .. image:: https://readthedocs.org/projects/adocker/badge/?version=latest
         :target: https://adocker.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
-
 .. image:: https://pyup.io/repos/github/leesdolphin/adocker/shield.svg
      :target: https://pyup.io/repos/github/leesdolphin/adocker/
      :alt: Updates

@@ -24,6 +24,10 @@ test_requirements = [
     # TODO: put package test requirements here
 ]
 
+cov_requirements = [
+    'coverage',
+]
+
 setup(
     name='adocker',
     version='0.1.0',
@@ -38,6 +42,7 @@ setup(
     tests_require=test_requirements,
     extras_require={
         'test': test_requirements,
+        'cov': cov_requirements,
     },
     license="Apache Software License 2.0",
     test_suite='tests',
