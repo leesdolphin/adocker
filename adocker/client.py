@@ -48,7 +48,5 @@ class DockerClient(AsyncContextManager):
             params=params,
         )
 
-
-
     async def __aexit__(self, exc_type, exc, tb):
         await self.client.__aexit__(exc_type, exc, tb)

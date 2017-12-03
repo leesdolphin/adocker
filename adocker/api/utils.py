@@ -4,7 +4,7 @@ import urllib.parse
 PATH_QUOTE = functools.partial(urllib.parse.quote_plus, safe="/:")
 
 
-class APIUtilitiesMixin(object):
+class ApiUtilitiesMixin(object):
 
     def _format_url(self, pathfmt, *args: str, versioned_api: bool=True) -> str:
         """

@@ -1,3 +1,5 @@
-# -*- coding: utf-8 -*-
+import pytest
 
 """Unit test package for adocker."""
+
+pytestmark = pytest.mark.filterwarnings('error')

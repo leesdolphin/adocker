@@ -14,12 +14,13 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'docker',
     'aiodocker',
-    'attrs'
+    'attrs',
 ]
 
 test_requirements = [
     'pytest',
-    'pytest-aiohttp'
+    'pytest-aiohttp',
+    'pytest-asyncio',
     # TODO: put package test requirements here
 ]
 
@@ -35,6 +36,9 @@ setup(
     include_package_data=True,
     install_requires=requirements,
     tests_require=test_requirements,
+    extras_require={
+        'test': test_requirements,
+    },
     license="Apache Software License 2.0",
     test_suite='tests',
     zip_safe=False,

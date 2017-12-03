@@ -4,13 +4,14 @@ from ..errors import AioDockerDeprecationWarning
 
 
 class AioDockerTransitionalDeprecationMixin(object):
-
     @property
     def docker_host(self) -> str:
         """
         This property is deprecated. Please use ``.base_url``.
         """
-        warnings.warn("Accessing `.docker_host` is deprecated. Use `.base_url`", AioDockerDeprecationWarning)
+        warnings.warn(
+            "Accessing `.docker_host` is deprecated. Use `.base_url`",
+            AioDockerDeprecationWarning)
         return self.base_url
 
     @docker_host.setter
@@ -18,7 +19,8 @@ class AioDockerTransitionalDeprecationMixin(object):
         """
         This property is deprecated. Please use ``.base_url``.
         """
-        warnings.warn("Setting `.docker_host` is deprecated. Use `.base_url`", AioDockerDeprecationWarning)
+        warnings.warn("Setting `.docker_host` is deprecated. Use `.base_url`",
+                      AioDockerDeprecationWarning)
         self.base_url = value
 
     @property
@@ -37,7 +39,10 @@ class AioDockerTransitionalDeprecationMixin(object):
 
     @api_version.setter
     def api_version(self, version: str):
-        if version == 'v':
-            warnings.warn("Setting `.api_version` a 'v...' string is deprecated. Remove the 'v' prefix.", AioDockerDeprecationWarning)
+        if version[0] == 'v':
+            warnings.warn(
+                'Setting `.api_version` a "v..." string is deprecated.'
+                ' Remove the "v" prefix.',
+                AioDockerDeprecationWarning)
             version = version[1:]
-        self.api_version = version
+        self._api_version = version

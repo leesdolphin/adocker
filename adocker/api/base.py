@@ -1,16 +1,16 @@
 import aiodocker
 
 
-from .image import ImageApiMixin
+from adocker.api.image import ImageApiMixin
 from .transitional import AioDockerTransitionalDeprecationMixin
-from .utils import APIUtilitiesMixin
+from .utils import ApiUtilitiesMixin
 from ..utils.streamed_response import StreamableResponse
 
 
 class APIClient(
         aiodocker.Docker,
         AioDockerTransitionalDeprecationMixin,
-        APIUtilitiesMixin,
+        ApiUtilitiesMixin,
         ImageApiMixin):
 
     def _json_stream(self, url, **kwargs) -> StreamableResponse:

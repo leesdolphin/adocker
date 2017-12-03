@@ -6,11 +6,10 @@ import aiohttp
 from .chunked_stream import ChunkedBytesStream, JsonStream
 from .contextlib import AsyncContextManager
 
-ResponseType = typ.TypeVar('ResponseType', aiohttp.ClientResponse)
-StreamType = typ.TypeVar('StreamType', ChunkedBytesStream)
+StreamType = typ.TypeVar('StreamType', ChunkedBytesStream, JsonStream)
 
 
-class StreamableResponse(typ.Generic[ResponseType, StreamType], abc.Awaitable,
+class StreamableResponse(typ.Generic[StreamType], abc.Awaitable,
                          abc.AsyncIterator, AsyncContextManager):
     """
     A Response to a method that streams blocks of data.
@@ -26,7 +25,7 @@ class StreamableResponse(typ.Generic[ResponseType, StreamType], abc.Awaitable,
     """
 
     def __init__(self,
-                 pending_response: typ.Awaitable[ResponseType],
+                 pending_response: typ.Awaitable[aiohttp.ClientResponse],
                  stream_class: typ.Type[StreamType] = JsonStream):
         self.pending_response = pending_response
         self.stream_class = stream_class
@@ -49,7 +48,7 @@ class StreamableResponse(typ.Generic[ResponseType, StreamType], abc.Awaitable,
                 self.stream = JsonStream(response)
         # TODO: (not in this function) Check response headers.
 
-    async def get_response(self) -> ResponseType:
+    async def get_response(self) -> aiohttp.ClientResponse:
         """
         Wait for the response headers to be ready and then return the response.
 
