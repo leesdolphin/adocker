@@ -31,7 +31,7 @@ setup(
     author="Lee Symes",
     author_email='leesdolphin@gmail.com',
     url='https://github.com/leesdolphin/adocker',
-    packages=find_packages(include=['adocker']),
+    packages=find_packages(include=['adocker', 'adocker.*']),
     include_package_data=True,
     install_requires=requirements,
     tests_require=test_requirements,
